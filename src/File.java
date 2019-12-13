@@ -24,11 +24,4 @@ class File extends Node {
     public void changeSize(int newSize) {
         setByteSize(newSize);
     }
-
-    @Override
-    public void update(Observable o, Object arg) {
-        // File objects do not observe any other objects so
-        // this should never be reached.
-        throw new UnsupportedOperationException();
-    }
 }

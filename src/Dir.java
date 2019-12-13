@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  * A directory in a file system, including the name of the directory and the
  * number of bytes used by the directory and its children.
  */
-class Dir extends Node {
+class Dir extends Node implements Observer {
 
     /**
      * The list of directories contained in this directory.
@@ -19,6 +20,18 @@ class Dir extends Node {
 
     public Dir(String name) {
         super(name, 100);
+    }
+
+    /**
+     * Make info a child of this directory and notify any observers of the
+     * size change. Also make this node observe info.
+     *
+     * @param info the new child
+     */
+    @Override
+    public void addChild(Node info) {
+        super.addChild(info);
+        info.addObserver(this);
     }
 
     /**

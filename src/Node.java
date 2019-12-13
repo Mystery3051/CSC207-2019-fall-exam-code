@@ -5,7 +5,7 @@ import java.util.*;
  * or file, and also the size of all the directories and files contained
  * in that directory.
  */
-public abstract class Node extends Observable implements Observer {
+public abstract class Node extends Observable {
 
     /**
      * The name of the directory or file.
@@ -34,12 +34,11 @@ public abstract class Node extends Observable implements Observer {
 
     /**
      * Make info a child of this directory and notify any observers of the
-     * size change. Also make this node observe info.
+     * size change.
      *
      * @param info the new child
      */
     public void addChild(Node info) {
-        info.addObserver(this);
         children.add(info);
         setByteSize(getByteSize() + info.getByteSize());
     }
