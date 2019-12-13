@@ -17,6 +17,11 @@ public abstract class Node extends Observable implements Observer {
     private int byteSize;
 
     /**
+     * The children of this node.
+     */
+    private List<Node> children = new ArrayList<>();
+
+    /**
      * A new Node representing a file or directory name of size byteSize.
      *
      * @param name     the name of the file or directory.
@@ -25,6 +30,27 @@ public abstract class Node extends Observable implements Observer {
     public Node(String name, int byteSize) {
         this.name = name;
         this.byteSize = byteSize;
+    }
+
+    /**
+     * Make info a child of this directory and notify any observers of the
+     * size change. Also make this node observe info.
+     *
+     * @param info the new child
+     */
+    public void addChild(Node info) {
+        info.addObserver(this);
+        children.add(info);
+        setByteSize(getByteSize() + info.getByteSize());
+    }
+
+    /**
+     * Return the children nodes of this node.
+     *
+     * @return the children nodes of this node
+     */
+    public List<Node> getChildren() {
+        return children;
     }
 
     /**

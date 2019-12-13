@@ -17,16 +17,16 @@ public abstract class FileSystemSizes {
         Dir grandchild1 = new Dir("dirdir");
         File grandchild2 = new File("g1.txt", 20);
 
-        root.addDir(child1);
-        root.addDir(child2);
-        root.addFile(child3);
-        child2.addDir(grandchild1);
-        child2.addFile(grandchild2);
+        root.addChild(child1);
+        root.addChild(child2);
+        root.addChild(child3);
+        child2.addChild(grandchild1);
+        child2.addChild(grandchild2);
 
         System.out.println("--------------------------------");
         printTree(root, "");
         File newLeaf = new File("leaf.txt", 100);
-        grandchild1.addFile(newLeaf);
+        grandchild1.addChild(newLeaf);
 
         System.out.println("--------------------------------");
         printTree(root, "");
@@ -46,15 +46,8 @@ public abstract class FileSystemSizes {
                 String.format("%s %s %d bytes",
                         indent, node.getName(), node.getByteSize()));
 
-        if (node instanceof Dir) {
-            Dir d = (Dir) node;
-            for (Node child : d.getDirectories()) {
+        for (Node child : node.getChildren()) {
                 printTree(child, indent + "  ");
             }
-
-            for (Node child : d.getFiles()) {
-                printTree(child, indent + "  ");
-            }
-        }
     }
 }

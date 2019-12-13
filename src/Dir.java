@@ -22,53 +22,11 @@ class Dir extends Node {
     }
 
     /**
-     * Make info a child of this directory and notify any observers of the
-     * size change. Also make this node observe info.
-     *
-     * @param info the new child
-     */
-    public void addDir(Dir info) {
-        info.addObserver(this);
-        directories.add(info);
-        setByteSize(getByteSize() + info.getByteSize());
-    }
-
-    /**
-     * Make info a child of this directory and notify any observers of the
-     * size change. Also make this node observe info.
-     *
-     * @param info the new child
-     */
-    public void addFile(File info) {
-        info.addObserver(this);
-        files.add(info);
-        setByteSize(getByteSize() + info.getByteSize());
-    }
-
-    /**
      * Update the size of this node by sizeDelta, the size difference from
      * this observed child.
      */
     @Override
     public void update(Observable o, Object sizeDelta) {
         setByteSize(getByteSize() + (Integer) sizeDelta);
-    }
-
-    /**
-     * Return the directories contained in this directory.
-     *
-     * @return the directories contained in this directory
-     */
-    public List<Dir> getDirectories() {
-        return directories;
-    }
-
-    /**
-     * Return the files contained in this directory.
-     *
-     * @return the files contained in this directory
-     */
-    public List<File> getFiles() {
-        return files;
     }
 }
