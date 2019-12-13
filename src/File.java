@@ -1,5 +1,3 @@
-import java.util.Observable;
-
 /**
  * A directory in a file system, including the number of bytes used
  * by the file.

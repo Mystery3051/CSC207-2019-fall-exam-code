@@ -10,14 +10,10 @@ import java.util.Observer;
 class Dir extends Node implements Observer {
 
     /**
-     * The list of directories contained in this directory.
+     * Create a new directory, it takes 100 bytes of memory.
+     *
+     * @param name
      */
-    private List<Dir> directories = new ArrayList<>();
-    /**
-     * The list of files contained in this directory.
-     */
-    private List<File> files = new ArrayList<>();
-
     public Dir(String name) {
         super(name, 100);
     }

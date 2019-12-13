@@ -10,12 +10,12 @@ public abstract class FileSystemSizes {
      */
     public static void main(String[] args) {
 
-        Dir root = new Dir("root");
-        Dir child1 = new Dir("dir1");
-        Dir child2 = new Dir("dir2");
-        File child3 = new File("f1.txt", 10);
-        Dir grandchild1 = new Dir("dirdir");
-        File grandchild2 = new File("g1.txt", 20);
+        Node root = new Dir("root");
+        Node child1 = new Dir("dir1");
+        Node child2 = new Dir("dir2");
+        Node child3 = new File("f1.txt", 10);
+        Node grandchild1 = new Dir("dirdir");
+        Node grandchild2 = new File("g1.txt", 20);
 
         root.addChild(child1);
         root.addChild(child2);
