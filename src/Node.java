@@ -1,3 +1,5 @@
+import org.w3c.dom.traversal.NodeIterator;
+
 import java.util.*;
 
 /**
@@ -5,7 +7,7 @@ import java.util.*;
  * or file, and also the size of all the directories and files contained
  * in that directory.
  */
-public abstract class Node extends Observable {
+public abstract class Node extends Observable implements Iterable<Node> {
 
     /**
      * The name of the directory or file.
@@ -44,15 +46,6 @@ public abstract class Node extends Observable {
     }
 
     /**
-     * Return the children nodes of this node.
-     *
-     * @return the children nodes of this node
-     */
-    public List<Node> getChildren() {
-        return children;
-    }
-
-    /**
      * Return the name of the file or directory.
      *
      * @return the name
@@ -80,6 +73,31 @@ public abstract class Node extends Observable {
         this.byteSize = byteSize;
         setChanged();
         notifyObservers(byteSize - oldSize);
+    }
+
+    @Override
+    public Iterator<Node> iterator() {
+        return new NodeIterator();
+    }
+
+    /**
+     * Iterator over the children of this node. Replacement for getChildren() method.
+     */
+    class NodeIterator implements Iterator<Node> {
+
+        int i = 0;
+
+        @Override
+        public boolean hasNext() {
+            return i < children.size();
+        }
+
+        @Override
+        public Node next() {
+            Node oldNode = children.get(i);
+            if (hasNext()) { i++;}
+            return oldNode;
+        }
     }
 }
 

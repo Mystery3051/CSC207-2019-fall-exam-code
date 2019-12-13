@@ -46,7 +46,7 @@ public abstract class FileSystemSizes {
                 String.format("%s %s %d bytes",
                         indent, node.getName(), node.getByteSize()));
 
-        for (Node child : node.getChildren()) {
+        for (Node child : node) {
                 printTree(child, indent + "  ");
             }
     }
